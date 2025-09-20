@@ -25,6 +25,36 @@ export default function _layout() {
           ),
         }}
       />
+
+      <Tabs.Screen
+        name="inbox"
+        options={{
+          title: "Inbox",
+          tabBarIcon: ({ color }) => (
+            <Feather name="bell" size={24} color={color} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="create"
+        options={{
+          title: "Create",
+          tabBarIcon: ({ color }) => (
+            <AntDesign name="plus" size={24} color={color} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="communities"
+        options={{
+          title: "Communities",
+          tabBarIcon: ({ color }) => (
+            <Feather name="users" size={24} color={color} />
+          ),
+        }}
+      />
     </Tabs>
   );
 }

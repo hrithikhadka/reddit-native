@@ -6,6 +6,7 @@ export default function Home() {
   const post = posts[0];
   return (
     <View style={{ paddingHorizontal: 15, paddingVertical: 10 }}>
+      {/*Post Header*/}
       <View style={{ flexDirection: "row", gap: 10 }}>
         <Image source={{ uri: post.group.image }} style={styles.image} />
         <Text style={{ fontWeight: "bold" }}>{post.group.name}</Text>
@@ -17,6 +18,14 @@ export default function Home() {
           <Text style={styles.joinButtonText}>Join</Text>
         </View>
       </View>
+
+      {/*Post Body*/}
+      <Text style={styles.title}>{post.title}</Text>
+      <Image
+        source={{ uri: post.image }}
+        style={{ width: "100%", aspectRatio: 4 / 3, borderRadius: 15 }}
+      />
+      <Text numberOfLines={4}>{post.description}</Text>
     </View>
   );
 }
@@ -34,5 +43,11 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     borderRadius: 10,
+  },
+
+  title: {
+    fontWeight: "bold",
+    fontSize: 17,
+    letterSpacing: 0.5,
   },
 });

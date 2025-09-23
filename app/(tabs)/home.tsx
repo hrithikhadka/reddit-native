@@ -1,3 +1,4 @@
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { formatDistanceToNowStrict } from "date-fns";
 import { Image, StyleSheet, Text, View } from "react-native";
 import posts from "../../assets/data/posts.json";
@@ -26,6 +27,40 @@ export default function Home() {
         style={{ width: "100%", aspectRatio: 4 / 3, borderRadius: 15 }}
       />
       <Text numberOfLines={4}>{post.description}</Text>
+
+      {/*Post Footer*/}
+      <View style={{ flexDirection: "row" }}>
+        <MaterialCommunityIcons
+          name="arrow-up-bold-outline"
+          size={19}
+          color="black"
+        />
+        <Text>{post.upvotes}</Text>
+        <MaterialCommunityIcons
+          name="arrow-down-bold-outline"
+          size={19}
+          color="black"
+        />
+        <MaterialCommunityIcons
+          name="comment-outline"
+          size={19}
+          color="black"
+        />
+        <Text>{post.nr_of_comments}</Text>
+
+        <View style={{ flexDirection: "row", marginLeft: "auto", gap: 10 }}>
+          <MaterialCommunityIcons
+            name="trophy-outline"
+            size={19}
+            color="black"
+          />
+          <MaterialCommunityIcons
+            name="share-outline"
+            size={19}
+            color="black"
+          />
+        </View>
+      </View>
     </View>
   );
 }

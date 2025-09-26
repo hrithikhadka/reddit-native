@@ -1,10 +1,13 @@
+import { Post } from "@/types";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { formatDistanceToNowStrict } from "date-fns";
 import { Image, StyleSheet, Text, View } from "react-native";
-import posts from "../../assets/data/posts.json";
 
-const PostListItem = () => {
-  const post = posts[0];
+type PostListItemProps = {
+  post: Post;
+};
+
+const PostListItem = ({ post }: PostListItemProps) => {
   return (
     <View style={{ paddingHorizontal: 15, paddingVertical: 10 }}>
       {/*Post Header*/}

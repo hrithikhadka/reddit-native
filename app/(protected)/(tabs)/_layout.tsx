@@ -20,7 +20,7 @@ export default function _layout() {
       }}
     >
       <Tabs.Screen
-        name="home"
+        name="index"
         options={{
           title: "Home",
           headerTitle: "Reddit",

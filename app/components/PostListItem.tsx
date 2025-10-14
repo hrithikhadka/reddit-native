@@ -13,9 +13,12 @@ export default function PostListItem({
   post,
   isDetailedPost,
 }: PostListItemProps) {
+  const shouldShowImage = isDetailedPost || post.image;
+  const shouldShowDescription = isDetailedPost || !post.image;
+
   return (
     <Link href={`/post/${post.id}`} asChild>
-      <View
+      <Pressable
         style={{
           paddingHorizontal: 15,
           paddingVertical: 10,
@@ -76,14 +79,15 @@ export default function PostListItem({
         <Text style={{ fontWeight: "bold", fontSize: 17, letterSpacing: 0.5 }}>
           {post.title}
         </Text>
-        {post.image && (
+
+        {shouldShowImage && post.image && (
           <Image
             source={{ uri: post.image }}
             style={{ width: "100%", aspectRatio: 4 / 3, borderRadius: 15 }}
           />
         )}
 
-        {post.description && !post.image && (
+        {shouldShowDescription && post.description && (
           <Text numberOfLines={isDetailedPost ? undefined : 4}>
             {post.description}
           </Text>
@@ -154,7 +158,7 @@ export default function PostListItem({
             />
           </View>
         </View>
-      </View>
+      </Pressable>
     </Link>
   );
 }

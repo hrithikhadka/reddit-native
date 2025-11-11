@@ -1,7 +1,15 @@
 import { AntDesign } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { useState } from "react";
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  KeyboardAvoidingView,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function create() {
@@ -27,24 +35,35 @@ export default function create() {
         </Pressable>
       </View>
 
-      {/* community selector */}
-      <View style={styles.communityContainer}>
-        <Text style={styles.rStyles}>r/</Text>
-        <Text style={{ fontWeight: "600" }}>Select a community</Text>
-      </View>
+      <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={{ paddingVertical: 15 }}
+        >
+          {/* community selector */}
+          <View style={styles.communityContainer}>
+            <Text style={styles.rStyles}>r/</Text>
+            <Text style={{ fontWeight: "600" }}>Select a community</Text>
+          </View>
 
-      {/* inputs */}
-      <TextInput
-        placeholder="Title"
-        style={{ fontSize: 20, fontWeight: "bold", paddingVertical: 20 }}
-        value={title}
-        onChangeText={(text) => setTitle(text)}
-      />
-      <TextInput
-        placeholder="body text (optional)"
-        value={bodyText}
-        onChangeText={(text) => setBodyText(text)}
-      />
+          {/* inputs */}
+          <TextInput
+            placeholder="Title"
+            style={{ fontSize: 20, fontWeight: "bold", paddingVertical: 20 }}
+            value={title}
+            onChangeText={(text) => setTitle(text)}
+            multiline
+            scrollEnabled={false}
+          />
+          <TextInput
+            placeholder="body text (optional)"
+            value={bodyText}
+            multiline
+            onChangeText={(text) => setBodyText(text)}
+            scrollEnabled={false}
+          />
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }

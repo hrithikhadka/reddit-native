@@ -15,6 +15,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function create() {
   const [title, setTitle] = useState<string>("");
   const [bodyText, setBodyText] = useState<string>("");
+
+  const goBack = () => {
+    setTitle("");
+    setBodyText("");
+    router.back();
+  };
+
   return (
     <SafeAreaView
       style={{ backgroundColor: "white", flex: 1, paddingHorizontal: 10 }}
@@ -25,7 +32,7 @@ export default function create() {
           name="close"
           size={30}
           color="black"
-          onPress={() => router.back()}
+          onPress={() => goBack()}
         />
         <Pressable
           onPress={() => console.error("Pressed")}

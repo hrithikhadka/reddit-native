@@ -1,8 +1,16 @@
+import groups from "@/assets/data/posts.json";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import EvilIcons from "@expo/vector-icons/EvilIcons";
 import { router } from "expo-router";
 import { useState } from "react";
-import { Text, TextInput, View } from "react-native";
+import {
+  FlatList,
+  Image,
+  Pressable,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const groupSelector = () => {
@@ -54,6 +62,26 @@ const groupSelector = () => {
           onChangeText={(text) => setSearchValue(text)}
         />
       </View>
+
+      <FlatList
+        data={groups}
+        renderItem={({ item }) => (
+          <Pressable
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 5,
+              marginBottom: 20,
+            }}
+          >
+            <Image
+              source={{ uri: item.group.image }}
+              style={{ width: 40, aspectRatio: 1, borderRadius: 20 }}
+            />
+            <Text style={{ fontWeight: "600" }}>{item.group.name}</Text>
+          </Pressable>
+        )}
+      />
     </SafeAreaView>
   );
 };

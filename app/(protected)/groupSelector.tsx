@@ -15,6 +15,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const groupSelector = () => {
   const [searchValue, setSearchValue] = useState<string>("");
+
+  const filteredGroups = groups.filter((item) =>
+    item.group.name.toLowerCase().includes(searchValue.toLowerCase())
+  );
+
   return (
     <SafeAreaView style={{ marginHorizontal: 10 }}>
       <View
@@ -64,7 +69,7 @@ const groupSelector = () => {
       </View>
 
       <FlatList
-        data={groups}
+        data={filteredGroups}
         renderItem={({ item }) => (
           <Pressable
             style={{

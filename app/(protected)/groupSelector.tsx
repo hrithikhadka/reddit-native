@@ -21,7 +21,7 @@ const groupSelector = () => {
   );
 
   return (
-    <SafeAreaView style={{ marginHorizontal: 10 }}>
+    <SafeAreaView style={{ marginHorizontal: 10, flex: 1 }}>
       <View
         style={{
           flexDirection: "row",
@@ -62,10 +62,18 @@ const groupSelector = () => {
         <TextInput
           placeholder="Search for a community"
           placeholderTextColor={"gray"}
-          style={{ paddingVertical: 10 }}
+          style={{ paddingVertical: 10, flex: 1 }}
           value={searchValue}
           onChangeText={(text) => setSearchValue(text)}
         />
+        {searchValue && (
+          <AntDesign
+            name="close-circle"
+            size={16}
+            color="#E4E4E4"
+            onPress={() => setSearchValue("")}
+          />
+        )}
       </View>
 
       <FlatList

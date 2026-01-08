@@ -1,7 +1,9 @@
 import groups from "@/assets/data/posts.json";
+import { Group } from "@/types";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import EvilIcons from "@expo/vector-icons/EvilIcons";
 import { router } from "expo-router";
+import { useSetAtom } from "jotai";
 import { useState } from "react";
 import {
   FlatList,
@@ -12,13 +14,20 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { selectedGroupAtom } from "../atoms";
 
 const groupSelector = () => {
   const [searchValue, setSearchValue] = useState<string>("");
+  const setGroup = useSetAtom(selectedGroupAtom);
 
   const filteredGroups = groups.filter((item) =>
     item.group.name.toLowerCase().includes(searchValue.toLowerCase())
   );
+
+  const onGroupSelected = (group: Group) => {
+    setGroup(group);
+    router.back();
+  };
 
   return (
     <SafeAreaView style={{ marginHorizontal: 10, flex: 1 }}>
@@ -80,6 +89,7 @@ const groupSelector = () => {
         data={filteredGroups}
         renderItem={({ item }) => (
           <Pressable
+            onPress={() => onGroupSelected(item)}
             style={{
               flexDirection: "row",
               alignItems: "center",

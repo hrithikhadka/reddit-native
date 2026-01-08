@@ -59,9 +59,9 @@ export default function create() {
                 <>
                   <Image
                     src={{ uri: group.image }}
-                    style={{ width: 20, height: 20 }}
+                    style={{ width: 20, height: 20, borderRadius: 10 }}
                   />
-                  <Text>{group.name}</Text>
+                  <Text style={{ fontWeight: "600" }}>{group.name}</Text>
                 </>
               ) : (
                 <>

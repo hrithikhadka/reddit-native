@@ -18,6 +18,7 @@ import posts from "../../../assets/data/posts.json";
 const DetailedPost = () => {
   const { id } = useLocalSearchParams();
   const [comment, setComment] = useState<string>("");
+  const [isInputFocused, setIsInputFocused] = useState<boolean>(false);
 
   const insets = useSafeAreaInsets();
 
@@ -36,27 +37,32 @@ const DetailedPost = () => {
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : undefined}
       style={{ flex: 1 }}
-      keyboardVerticalOffset={insets.top}
+      keyboardVerticalOffset={insets.top + 10}
     >
       <FlatList
-        data={postComments}
-        renderItem={({ item }) => <CommentListItem comment={item} />}
         ListHeaderComponent={
           <PostListItem post={detailedPost} isDetailedPost />
         }
+        data={postComments}
+        renderItem={({ item }) => <CommentListItem comment={item} />}
       />
 
       <View
         style={{
           paddingBottom: insets.bottom,
+          borderBottomWidth: 1,
           borderBottomColor: "lightgray",
           padding: 10,
           backgroundColor: "white",
           borderRadius: 10,
           shadowColor: "#000",
-          shadowOffset: { width: 0, height: -3 },
+          shadowOffset: {
+            width: 0,
+            height: -3,
+          },
           shadowOpacity: 0.1,
           shadowRadius: 3,
+
           elevation: 4,
         }}
       >
@@ -66,27 +72,31 @@ const DetailedPost = () => {
           value={comment}
           onChangeText={(text) => setComment(text)}
           multiline
+          onFocus={() => setIsInputFocused(true)}
+          onBlur={() => setIsInputFocused(false)}
         />
-        <Pressable
-          style={{
-            backgroundColor: "#0d469b",
-            borderRadius: 15,
-            marginLeft: "auto",
-            marginTop: 15,
-          }}
-        >
-          <Text
+        {isInputFocused && (
+          <Pressable
             style={{
-              color: "white",
-              paddingVertical: 5,
-              paddingHorizontal: 10,
-              fontWeight: "bold",
-              fontSize: 13,
+              backgroundColor: "#0d469b",
+              borderRadius: 15,
+              marginLeft: "auto",
+              marginTop: 15,
             }}
           >
-            Reply
-          </Text>
-        </Pressable>
+            <Text
+              style={{
+                color: "white",
+                paddingVertical: 5,
+                paddingHorizontal: 10,
+                fontWeight: "bold",
+                fontSize: 13,
+              }}
+            >
+              Reply
+            </Text>
+          </Pressable>
+        )}
       </View>
     </KeyboardAvoidingView>
   );
